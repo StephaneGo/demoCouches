@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des utilisateurs par âge</title>
+</head>
+<body>
+    <h1>Liste des utilisateurs par âge</h1>
+
+    <form th:action="@{/users}" method="get">
+        <label for="age">Sélectionnez un âge :</label>
+        <input type="number" id="age" name="age" required th:value="selectedAge">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <h2>Utilisateurs âgés de <span th:text="${selectedAge}"></span> ans ou plus:</h2>
+    <ul>
+        <li th:each="user : ${users}">
+            <span th:text="${user.name}"></span> - <span th:text="${user.age}"></span> ans
+        </li>
+    </ul>
+    
+    <h2>Ajouter un utilisateur : </h2>
+    <form th:action="@{/saveUser}" th:object="${user}" method="post">
+	<label>Nom :</label><input type="text" th:field="*{name}"  />
+	<label> Age :</label><input type="number" min=0 th:field="*{age}"  />
+	<button>Ajouter</button>
+	</div>
+</form>
+</body>
+</html>
